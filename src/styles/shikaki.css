@@ -27,22 +27,11 @@
   border-radius: 3px;
 }
 
-/* 纯 CSS 绘制的“原稿纸 (Genko Yoshi)”网格背景 */
-.genko-yoshi-bg {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  z-index: 1;
-  pointer-events: none;
-  background-image: 
-    linear-gradient(to right, transparent 95%, rgba(200, 50, 50, 0.1) 95%),
-    linear-gradient(to bottom, transparent 95%, rgba(200, 50, 50, 0.1) 95%);
-  background-size: 3rem 3rem; /* 定义每个格子的大小 */
-  opacity: 0.8;
-}
+
 
 /* 抽象动态 SVG 咖啡渍 */
 .svg-coffee-stain {
-  position: fixed;
+  position: absolute;
   z-index: 1;
   opacity: 0.08; /* 非常隐约的痕迹 */
   pointer-events: none;
@@ -98,6 +87,7 @@
   /* 左右边距大一点，作为横向滚动的缓冲 */
   padding: 4rem 15vw 4rem 15vw;
   display: flex;
+  flex-direction: column; /* 确保在 vertical-rl 下横向并列排版 */
   gap: 6rem; /* 标题与正文的距离 */
   align-items: center; /* 在 vertical-rl 中，这等于居中显示每一行 */
 }
@@ -113,6 +103,7 @@
 
 .lyrics-flow {
   display: flex;
+  flex-direction: column; /* 确保在 vertical-rl 下列与列横向并列，防止垂直塌陷 */
   gap: 3rem; /* 竖排中，也就是每一列的列间距 */
   align-items: flex-start;
 }
@@ -121,6 +112,8 @@
   display: flex;
   flex-direction: column; /* 让日文与中文并列（左右） */
   gap: 1.5rem;
+  border-right: 1px solid rgba(200, 50, 50, 0.22); /* 右侧朱红分栏线，宛如古典诗卷 */
+  padding-right: 1.5rem; /* 让歌词文字与红线保持呼吸感 */
 }
 
 .lyric-ja {
