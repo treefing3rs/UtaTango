@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&display=swap');
+
+/* Dakara 专属 CSS - 夏日透明与留白文学风 */
+.dakara-container {
+  min-height: 100vh;
+  background: url('/dakara-summer-bg.png') center/cover no-repeat fixed;
+  color: #333;
+  font-family: 'Noto Serif JP', serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* 极其轻盈的白色遮罩，增加文字辨识度同时保留空气感 */
+.dakara-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.85) 100%);
+  backdrop-filter: blur(4px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.dakara-nav {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  z-index: 10;
+}
+
+.dakara-back-btn {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #555;
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+  border-radius: 30px;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(10px);
+}
+
+.dakara-back-btn:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: #000;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  transform: translateX(-5px);
+}
+
+/* 核心内容区：像信纸一样 */
+.dakara-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 8rem 2rem 15rem 2rem;
+}
+
+.dakara-title {
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 6rem;
+  text-align: center;
+  color: #333;
+  letter-spacing: 4px;
+}
+
+.lyrics-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.dakara-line {
+  font-size: 1.3rem;
+  line-height: 2.2;
+  transition: all 0.3s ease;
+  position: relative;
+  text-align: center;
+}
+
+.dakara-zh {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 0.5rem;
+  letter-spacing: 2px;
+  font-family: var(--font-jp); /* 中文用无衬线体更易读 */
+}
+
+/* === 核心交互：时光褪色与水墨显影 === */
+.faded-vocab {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  padding: 0 4px;
+  /* 初始状态：如阳光暴晒般褪色，近乎透明 */
+  color: transparent;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  transition: all 2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.faded-vocab::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(0,0,0,0.1);
+}
+
+/* 显影状态：深邃的海蓝色，文字浮现 */
+.faded-vocab.revealed {
+  color: #1a4a76;
+  text-shadow: 0 0 0px rgba(0, 0, 0, 0);
+}
+
+.faded-vocab.revealed::after {
+  background: rgba(26, 74, 118, 0.4);
+}
+
+/* 专属弹窗皮肤 - 夏日玻璃卡片 */
+.glass-popup {
+  position: fixed;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  padding: 1.5rem;
+  width: 280px;
+  pointer-events: none;
+  z-index: 9999;
+  color: #333;
+  transform: translate(15px, 15px);
+  transition: top 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), left 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05), inset 0 0 0 1px rgba(255,255,255,0.5);
+  backdrop-filter: blur(15px);
+  border-radius: 8px;
+  font-family: var(--font-jp);
+}
+
+.glass-popup h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.6rem;
+  color: #1a4a76;
+  border-bottom: 1px solid rgba(26, 74, 118, 0.2);
+  padding-bottom: 0.5rem;
+  font-family: 'Noto Serif JP', serif;
+}
+
+.glass-popup .popup-ruby {
+  font-size: 0.85rem;
+  color: #777;
+  margin-left: 0.5rem;
+}
+
+.glass-popup p {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+}
+
+.glass-popup .popup-hint {
+  font-size: 0.75rem;
+  color: #999;
+  text-align: right;
+  letter-spacing: 1px;
+}

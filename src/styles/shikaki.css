@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600&display=swap');
+
+/* 第一卷专属 CSS - 原稿纸竖排与纯代码排版艺术 */
+
+.shikaki-wrapper {
+  height: 100vh;
+  width: 100vw;
+  background-color: #FDFBF7; /* 泛黄的纸张底色 */
+  color: #3b2f2f; /* 深棕色墨迹，类似褪色的墨水 */
+  font-family: 'Shippori Mincho', serif; /* 最经典的日文文学字体 */
+  overflow-x: auto;
+  overflow-y: hidden;
+  position: relative;
+  /* 核心：传统日文竖排模式 */
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  /* 自定义滚动条样式 */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(200, 50, 50, 0.3) transparent;
+}
+
+.shikaki-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+.shikaki-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(200, 50, 50, 0.3);
+  border-radius: 3px;
+}
+
+/* 纯 CSS 绘制的“原稿纸 (Genko Yoshi)”网格背景 */
+.genko-yoshi-bg {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(to right, transparent 95%, rgba(200, 50, 50, 0.1) 95%),
+    linear-gradient(to bottom, transparent 95%, rgba(200, 50, 50, 0.1) 95%);
+  background-size: 3rem 3rem; /* 定义每个格子的大小 */
+  opacity: 0.8;
+}
+
+/* 抽象动态 SVG 咖啡渍 */
+.svg-coffee-stain {
+  position: fixed;
+  z-index: 1;
+  opacity: 0.08; /* 非常隐约的痕迹 */
+  pointer-events: none;
+  fill: #5A3F2C;
+}
+
+.stain-1 {
+  top: -5%; left: 15%; width: 450px; height: 450px;
+  animation: float-rotate 80s linear infinite;
+}
+
+.stain-2 {
+  bottom: -10%; right: 5%; width: 550px; height: 550px;
+  animation: float-rotate 120s linear infinite reverse;
+}
+
+@keyframes float-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 导航按键 */
+.shikaki-nav {
+  position: absolute;
+  top: 2rem;
+  right: 2rem; /* 竖排阅读从右开始，所以按钮在右上 */
+  z-index: 10;
+  writing-mode: horizontal-tb; /* 按钮内部依然横向，便于阅读 */
+}
+
+.shikaki-back-btn {
+  background: transparent;
+  border: 1px solid #3b2f2f;
+  color: #3b2f2f;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  font-family: 'Shippori Mincho', serif;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  transition: all 0.4s ease;
+}
+
+.shikaki-back-btn:hover {
+  background: #3b2f2f;
+  color: #FDFBF7;
+}
+
+/* 诗稿内容排布区 */
+.shikaki-content {
+  position: relative;
+  z-index: 2;
+  height: 100vh;
+  /* 左右边距大一点，作为横向滚动的缓冲 */
+  padding: 4rem 15vw 4rem 15vw;
+  display: flex;
+  gap: 6rem; /* 标题与正文的距离 */
+  align-items: center; /* 在 vertical-rl 中，这等于居中显示每一行 */
+}
+
+.shikaki-title {
+  font-size: 3.5rem;
+  font-weight: 600;
+  letter-spacing: 1.5rem; /* 竖排的字间距极大化，体现诗意 */
+  margin-left: 5rem; /* 往下推 */
+  border-right: 2px solid rgba(200, 50, 50, 0.3); /* 右侧红线，类似书脊 */
+  padding-right: 1.5rem;
+}
+
+.lyrics-flow {
+  display: flex;
+  gap: 3rem; /* 竖排中，也就是每一列的列间距 */
+  align-items: flex-start;
+}
+
+.shikaki-line {
+  display: flex;
+  flex-direction: column; /* 让日文与中文并列（左右） */
+  gap: 1.5rem;
+}
+
+.lyric-ja {
+  font-size: 1.6rem;
+  line-height: 1.8;
+  letter-spacing: 0.8rem;
+}
+
+.shikaki-zh {
+  font-size: 0.9rem;
+  color: #8c7e7e;
+  letter-spacing: 0.3rem;
+  opacity: 0.8;
+}
+
+/* === 核心交互：填空落墨 === */
+.blank-vocab {
+  display: inline-block;
+  min-height: 4rem; /* 竖排中的高度即横向宽度 */
+  border: 1px dashed rgba(200, 50, 50, 0.6); /* 红色虚线模拟待填空的格子 */
+  margin: 0.2rem 0;
+  cursor: crosshair;
+  position: relative;
+  transition: all 0.4s ease;
+  color: transparent; /* 初始隐藏 */
+}
+
+/* 填字显影状态 */
+.blank-vocab.filled {
+  color: #1a1a1a;
+  border-color: transparent;
+  font-weight: 600;
+  text-shadow: 0 0 4px rgba(0,0,0,0.4); /* 笔墨刚刚落下的微晕感 */
+}
+
+/* 批注条 (Memo Note) 风格弹窗 */
+.memo-popup {
+  position: fixed;
+  background: #FFFCE8; /* 类似淡黄色的便签纸 */
+  border: 1px solid #D4C5B0;
+  border-left: 4px solid #C83232; /* 红色左边栏，像红笔批示 */
+  padding: 1.2rem;
+  width: 260px;
+  pointer-events: none;
+  z-index: 9999;
+  color: #3b2f2f;
+  transform: translate(15px, 15px);
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.08);
+  font-family: 'Shippori Mincho', serif;
+  writing-mode: horizontal-tb; /* 强制改回横排，方便阅读释义 */
+  transition: top 0.2s linear, left 0.2s linear;
+}
+
+.memo-popup h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px dashed rgba(200, 50, 50, 0.4);
+}
+
+.memo-popup .popup-ruby {
+  font-size: 0.85rem;
+  color: #8a7b7b;
+  margin-left: 0.5rem;
+}
+
+.memo-popup p {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 0.8rem;
+}
+
+.memo-popup .popup-hint {
+  font-size: 0.8rem;
+  color: #C83232;
+  text-align: right;
+  opacity: 0.8;
+}
