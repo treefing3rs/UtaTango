@@ -127,11 +127,15 @@ const DakaraSong = () => {
                         onMouseLeave={() => {
                           tooltipHandlers.onMouseLeave();
                         }}
-                        onClick={(e) => {
-                          if (isRevealed) speakText(word.text, e);
-                        }}
                       >
-                        <InteractiveRuby word={word} />
+                        <InteractiveRuby 
+                          word={word} 
+                          onClick={(e) => {
+                            handleReveal(word);
+                            tooltipHandlers.onMouseEnter(word, e);
+                            speakText(word.text, e);
+                          }}
+                        />
                       </span>
                     );
                   }

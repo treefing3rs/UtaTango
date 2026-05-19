@@ -10,6 +10,7 @@ const InteractiveRuby = ({
   onMouseEnter, 
   onMouseMove, 
   onMouseLeave,
+  onClick,
   className = ""
 }) => {
   const { speakText } = useSpeech();
@@ -34,7 +35,11 @@ const InteractiveRuby = ({
         onMouseLeave={() => onMouseLeave && onMouseLeave()}
         onClick={(e) => {
           e.stopPropagation();
-          speakText(word.text, e);
+          if (onClick) {
+            onClick(e);
+          } else {
+            speakText(word.text, e);
+          }
         }}
       >
         {word.text}<rt>{word.r}</rt>

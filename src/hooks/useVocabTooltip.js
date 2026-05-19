@@ -33,13 +33,26 @@ export const useVocabTooltip = () => {
       : (isShikaki ? 260 : 280);
     const safeMargin = 16; // 16px 黄金安全呼吸间距
 
-    // 1. 补偿纵向页面滚动 (适用于普通纵向滚动页面，如 Dakara)
-    posY += window.scrollY;
-    posX += window.scrollX;
-
-    // 2. 补偿横向容器滚动 (针对第一首横卷歌词，如 Shikaki)
-    if (wrapper) {
-      posX += wrapper.scrollLeft;
+    // 针对移动端，或者 clientX/Y 为 0 (说明是模拟鼠标事件且坐标失效)，我们使用元素的 bounding rect 进行精准定位
+    if (isMobile || (posX === 0 && posY === 0)) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      if (isShikaki) {
+        // 竖排 (Shikaki)：弹窗放置在单词左侧，顶端对齐，并加上横向滚动补偿
+        const scrollLeft = wrapper ? wrapper.scrollLeft : 0;
+        posX = rect.left - tooltipWidth - 10 + scrollLeft;
+        posY = rect.top + window.scrollY;
+      } else {
+        // 横排 (Dakara)：弹窗放置在单词下方，水平居中，并加上纵向滚动补偿
+        posX = rect.left + rect.width / 2 - tooltipWidth / 2 + window.scrollX;
+        posY = rect.bottom + 8 + window.scrollY;
+      }
+    } else {
+      // PC 端普通悬浮坐标，补偿滚动
+      posY += window.scrollY;
+      posX += window.scrollX;
+      if (wrapper) {
+        posX += wrapper.scrollLeft;
+      }
     }
 
     // 3. 【核心物理壁障】：计算当前滚动视口下的 X 轴左右防撞物理区间

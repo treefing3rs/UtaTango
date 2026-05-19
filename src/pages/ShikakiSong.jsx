@@ -156,10 +156,20 @@ const ShikakiSong = () => {
                           tooltipHandlers.onMouseLeave();
                         }}
                         onClick={(e) => {
-                          if (isFilled) speakText(word.text, e);
+                          handleFill(word);
+                          tooltipHandlers.onMouseEnter(word, e);
+                          speakText(word.text, e);
                         }}
                       >
-                        {isFilled ? <InteractiveRuby word={word} /> : '　'}
+                        {isFilled ? (
+                          <InteractiveRuby 
+                            word={word} 
+                            onClick={(e) => {
+                              tooltipHandlers.onMouseEnter(word, e);
+                              speakText(word.text, e);
+                            }}
+                          />
+                        ) : '　'}
                       </span>
                     );
                   }

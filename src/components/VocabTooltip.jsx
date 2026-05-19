@@ -22,24 +22,26 @@ const VocabTooltip = ({
     }
   }, [vocab]);
 
-  // 如果从来没有词被激活过，先不渲染任何东西
-  if (!displayVocab) return null;
-
+  // 始终渲染 outer div 以保证 DOM 稳定性与平滑的入场动画，隐藏时 pointerEvents 设为 none
   return (
     <div 
-      className={`${containerClassName} ${visible ? 'active' : ''}`} 
+      className={`${containerClassName} ${visible && displayVocab ? 'active' : ''}`} 
       style={{ 
         top: position.y, 
         left: position.x,
-        pointerEvents: visible ? 'auto' : 'none' // 隐藏时禁用鼠标事件
+        pointerEvents: visible && displayVocab ? 'auto' : 'none' // 隐藏时禁用鼠标事件
       }}
     >
-      {bgClassName && <div className={bgClassName}></div>}
-      <h3>
-        {displayVocab.text} <span className="popup-ruby">{displayVocab.r}</span>
-      </h3>
-      <p>{displayVocab.meaning}</p>
-      {hintText && <div className="popup-hint">{hintText}</div>}
+      {displayVocab && (
+        <>
+          {bgClassName && <div className={bgClassName}></div>}
+          <h3>
+            {displayVocab.text} <span className="popup-ruby">{displayVocab.r}</span>
+          </h3>
+          <p>{displayVocab.meaning}</p>
+          {hintText && <div className="popup-hint">{hintText}</div>}
+        </>
+      )}
     </div>
   );
 };
