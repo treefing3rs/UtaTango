@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 /**
- * VocabTooltip - 全局通用悬浮单词释义弹窗 (Headless 架构)
- * 仅负责渲染内容架构和相对鼠标的坐标定位，视觉表现 (皮肤) 完全由传入的 className 决定。
+ * VocabTooltip - 全局通用悬浮单词释义弹窗 (时光留影 + 高性能渐变版)
  */
 const VocabTooltip = ({ 
   vocab, 
@@ -11,18 +10,39 @@ const VocabTooltip = ({
   bgClassName = "", // 背景特俗效果层的 className
   hintText = "💡 点击单词聆听原声朗读"
 }) => {
-  if (!vocab) return null;
+  const [displayVocab, setDisplayVocab] = useState(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (vocab) {
+      setDisplayVocab(vocab);
+      setVisible(true);
+    } else {
+      setVisible(false);
+    }
+  }, [vocab]);
+
+  // 如果从来没有词被激活过，先不渲染任何东西
+  if (!displayVocab) return null;
 
   return (
-    <div className={containerClassName} style={{ top: position.y, left: position.x }}>
+    <div 
+      className={`${containerClassName} ${visible ? 'active' : ''}`} 
+      style={{ 
+        top: position.y, 
+        left: position.x,
+        pointerEvents: visible ? 'auto' : 'none' // 隐藏时禁用鼠标事件
+      }}
+    >
       {bgClassName && <div className={bgClassName}></div>}
       <h3>
-        {vocab.text} <span className="popup-ruby">{vocab.r}</span>
+        {displayVocab.text} <span className="popup-ruby">{displayVocab.r}</span>
       </h3>
-      <p>{vocab.meaning}</p>
+      <p>{displayVocab.meaning}</p>
       {hintText && <div className="popup-hint">{hintText}</div>}
     </div>
   );
 };
 
 export default VocabTooltip;
+
