@@ -9,8 +9,9 @@ const DakaraSong = lazy(() => import('./pages/DakaraSong'));
 
 function App() {
   return (
-    <Router>
+    <Router basename={import.meta.env.BASE_URL}>
       <Suspense fallback={<div style={{color:'var(--text-muted)', padding: '2rem', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'var(--font-jp)'}}>Now Loading...</div>}>
+
         <Routes>
           <Route path="/" element={<Homepage />} />
           {/* 专辑展示层级 */}
