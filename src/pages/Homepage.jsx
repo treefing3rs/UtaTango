@@ -35,8 +35,9 @@ const Homepage = () => {
               key={album.id} 
               className="song-card"
               style={{ 
-                background: album.coverImage ? `url(${album.coverImage}) center/cover no-repeat` : album.themeColor 
+                background: album.coverImage ? `url(${import.meta.env.BASE_URL}${album.coverImage.replace(/^\//, '')}) center/cover no-repeat` : album.themeColor 
               }}
+
               onClick={() => navigate(`/album/${album.id}`)}
             >
               <div className="card-glass-overlay">

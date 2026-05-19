@@ -31,7 +31,8 @@ const AlbumPage = () => {
         {/* 左侧：专辑海报展示与半露出的黑胶唱片特效 */}
         <div className="album-cover-section">
           <div className="album-cover-3d">
-            <img src={album.coverImage} alt={album.title} className="cover-img" />
+            <img src={`${import.meta.env.BASE_URL}${album.coverImage.replace(/^\//, '')}`} alt={album.title} className="cover-img" />
+
             <div className="vinyl-record-deco"></div>
           </div>
           <div className="album-meta">
