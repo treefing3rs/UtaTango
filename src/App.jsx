@@ -6,11 +6,12 @@ import Homepage from './pages/Homepage';
 const AlbumPage = lazy(() => import('./pages/AlbumPage'));
 const ShikakiSong = lazy(() => import('./pages/ShikakiSong'));
 const DakaraSong = lazy(() => import('./pages/DakaraSong'));
+const HitchcockSong = lazy(() => import('./pages/HitchcockSong'));
 
 function App() {
   return (
     <Router basename={import.meta.env.BASE_URL}>
-      <Suspense fallback={<div style={{color:'var(--text-muted)', padding: '2rem', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'var(--font-jp)'}}>Now Loading...</div>}>
+      <Suspense fallback={<div style={{ color: 'var(--text-muted)', padding: '2rem', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'var(--font-jp)' }}>Now Loading...</div>}>
 
         <Routes>
           <Route path="/" element={<Homepage />} />
@@ -19,6 +20,7 @@ function App() {
           {/* 每一集独立的沙盒实验页面 */}
           <Route path="/song/shikaki-to-coffee" element={<ShikakiSong />} />
           <Route path="/song/dakara-boku-wa" element={<DakaraSong />} />
+          <Route path="/song/hitchcock" element={<HitchcockSong />} />
         </Routes>
       </Suspense>
     </Router>

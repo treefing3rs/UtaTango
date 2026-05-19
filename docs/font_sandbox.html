@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>UtaTango 字体选型沙盒</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Klee+One:wght@400;600&family=Yomogi&family=Yuji+Syuku&family=Zen+Kurenaido&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #1f1f23;
+      color: rgba(255,255,255,0.95);
+      font-family: 'Noto Serif JP', serif;
+      padding: 3rem;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px dashed rgba(255,255,255,0.2);
+      padding-bottom: 0.5rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+    }
+    .sandbox-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      width: 100%;
+      max-width: 1200px;
+    }
+    .font-card {
+      background: rgba(255,255,255,0.03);
+      border: 2px dashed rgba(255,255,255,0.2);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .font-card:hover {
+      border-color: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.05);
+    }
+    .font-name {
+      font-size: 1.1rem;
+      color: #38bdf8;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+    .font-desc {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 2rem;
+      line-height: 1.4;
+      height: 2.8rem;
+    }
+    .sample-area {
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      margin: 0 auto;
+      height: 250px;
+      border-left: 1px dotted rgba(255,255,255,0.1);
+      padding-left: 1.5rem;
+    }
+    .sample-line {
+      font-size: 2.2rem;
+      letter-spacing: 0.2em;
+      line-height: 1.8;
+      margin-left: 1.5rem;
+    }
+    .part-normal {
+      color: rgba(255,255,255,0.3);
+    }
+    /* 字体绑定 */
+    .font-kurenaido {
+      font-family: 'Zen Kurenaido', sans-serif;
+    }
+    .font-klee {
+      font-family: 'Klee One', serif;
+    }
+    .font-syuku {
+      font-family: 'Yuji Syuku', serif;
+    }
+    .font-yomogi {
+      font-family: 'Yomogi', sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎬 UtaTango《ヒッチコック》细长手写体选型沙盒</h1>
+
+  <div class="sandbox-container">
+
+    <!-- 选项 A -->
+    <div class="font-card">
+      <div class="font-name">选项 A: Zen Kurenaido (禅·红染)</div>
+      <div class="font-desc">极其纤细高挑的硬笔随笔体。清瘦优雅，极其类似于高精度中性笔或自动铅笔的字迹，空灵轻盈。</div>
+      <div class="sample-area font-kurenaido">
+        <div class="sample-line">数瞬</div>
+        <div class="sample-line">騒めく</div>
+        <div class="sample-line"><span class="part-normal">また</span>夏を追う</div>
+      </div>
+    </div>
+
+    <!-- 选项 B -->
+    <div class="font-card">
+      <div class="font-name">选项 B: Klee One (克利体)</div>
+      <div class="font-desc">清隽端庄的硬笔钢笔字。笔锋瘦劲优雅，粗细控制得当，是日系高端设计中最受偏爱的文学体。</div>
+      <div class="sample-area font-klee">
+        <div class="sample-line">数瞬</div>
+        <div class="sample-line">騒めく</div>
+        <div class="sample-line"><span class="part-normal">また</span>夏を追う</div>
+      </div>
+    </div>
+
+    <!-- 选项 C -->
+    <div class="font-card">
+      <div class="font-name">选项 C: Yuji Syuku (宿体)</div>
+      <div class="font-desc">保留了毛笔的行书风骨但笔画明显更修长、瘦劲的细体书写体。边缘无杂质，极其清丽洒脱。</div>
+      <div class="sample-area font-syuku">
+        <div class="sample-line">数瞬</div>
+        <div class="sample-line">騒めく</div>
+        <div class="sample-line"><span class="part-normal">また</span>夏を追う</div>
+      </div>
+    </div>
+
+    <!-- 选项 D -->
+    <div class="font-card">
+      <div class="font-name">选项 D: Yomogi (蓬体)</div>
+      <div class="font-desc">清隽纤幼的文艺少女笔记体。相比克利体多了一分稚嫩与温柔，字形圆润轻快。</div>
+      <div class="sample-area font-yomogi">
+        <div class="sample-line">数瞬</div>
+        <div class="sample-line">騒めく</div>
+        <div class="sample-line"><span class="part-normal">また</span>夏を追う</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

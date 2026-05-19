@@ -28,6 +28,15 @@ export const albums = [
         wordsCount: 14,
         route: "/song/dakara-boku-wa",
         component: "DakaraSong"
+      },
+      {
+        id: "hitchcock",
+        title: "ヒッチコック",
+        level: "N2",
+        vibe: "电影放映室 | 纵排胶片",
+        wordsCount: 13,
+        route: "/song/hitchcock",
+        component: "HitchcockSong"
       }
     ]
   }
