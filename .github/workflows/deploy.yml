@@ -1,0 +1,55 @@
+# 自动部署 UtaTango 至 GitHub Pages 的工作流
+name: Deploy UtaTango to Pages
+
+on:
+  # 当向 master 分支 push 代码时触发
+  push:
+    branches: ["master"]
+
+  # 允许在 GitHub 网页的 Actions 页面手动点击触发
+  workflow_dispatch:
+
+# 设置 GITHUB_TOKEN 权限，以允许 Actions 进行 Pages 部署
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 确保在同一时间只有一个部署任务运行，避免部署版本冲突
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. 检出源码 (Checkout)
+        uses: actions/checkout@v4
+      
+      - name: 2. 安装 Node.js 环境
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: 3. 极速安装 npm 依赖
+        run: npm ci
+
+      - name: 4. 运行编译打包 (Build)
+        run: npm run build
+
+      - name: 5. 适配 GitHub Pages 容器环境
+        uses: actions/configure-pages@v5
+
+      - name: 6. 上传打包好的 dist 静态网页资源
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+      - name: 7. 直投并部署至 GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
