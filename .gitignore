@@ -22,3 +22,8 @@ desktop.ini
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# 忽略打包编译成品（云端 Actions 自动部署，本地彻底拉黑）
+dist/
+dist-ssr/
+
