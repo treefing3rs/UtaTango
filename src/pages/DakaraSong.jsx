@@ -81,9 +81,15 @@ const DakaraSong = () => {
   
   // 记录已被“显影”的词汇
   const [revealedWords, setRevealedWords] = useState(new Set());
+  const [bgLoaded, setBgLoaded] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    
+    // 异步预加载大背景图片，防止生硬地从上往下渲染
+    const img = new Image();
+    img.src = `${import.meta.env.BASE_URL}dakara-summer-bg.png`;
+    img.onload = () => setBgLoaded(true);
   }, []);
 
   const handleReveal = (word) => {
@@ -95,6 +101,8 @@ const DakaraSong = () => {
 
   return (
     <div className="dakara-container">
+      {/* 预置渐变占位与平滑淡入背景层 */}
+      <div className={`dakara-bg-image ${bgLoaded ? 'loaded' : ''}`} />
       <div className="dakara-overlay"></div>
       
       <nav className="dakara-nav">

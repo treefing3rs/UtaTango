@@ -22,14 +22,14 @@ const VocabTooltip = ({
     }
   }, [vocab]);
 
-  // 始终渲染 outer div 以保证 DOM 稳定性与平滑的入场动画，隐藏时 pointerEvents 设为 none
+  // 始终渲染 outer div 以保证 DOM 稳定性与平滑的入场动画，始终使用 pointer-events: 'none' 防止悬浮窗遮挡鼠标导致触发 leave 从而一动即逝的 Bug
   return (
     <div 
       className={`${containerClassName} ${visible && displayVocab ? 'active' : ''}`} 
       style={{ 
         top: position.y, 
         left: position.x,
-        pointerEvents: visible && displayVocab ? 'auto' : 'none' // 隐藏时禁用鼠标事件
+        pointerEvents: 'none' // 禁用鼠标交互以解决 PC 端一动即逝和静态固定的 Bug
       }}
     >
       {displayVocab && (

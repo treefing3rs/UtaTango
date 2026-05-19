@@ -3,11 +3,34 @@
 /* Dakara 专属 CSS - 夏日透明与留白文学风 */
 .dakara-container {
   min-height: 100vh;
-  background: url('/dakara-summer-bg.png') center/cover no-repeat fixed;
+  /* 优雅的夏日天空浅蓝色渐变，作为图片加载完成前的占位底色与过渡 */
+  background: linear-gradient(135deg, #d3e5f4 0%, #edf4f9 100%);
   color: #333;
   font-family: 'Noto Serif JP', serif;
   position: relative;
   overflow-x: hidden;
+}
+
+/* 高性能异步淡入大背景图层 */
+.dakara-bg-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/dakara-summer-bg.png') center/cover no-repeat fixed;
+  z-index: 0;
+  opacity: 0;
+  filter: blur(4px); /* 初始微弱磨砂占位，防止边缘发硬 */
+  transform: scale(1.01); /* 微调比例防边缘白边 */
+  transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  pointer-events: none;
+}
+
+.dakara-bg-image.loaded {
+  opacity: 1;
+  filter: blur(0px);
+  transform: scale(1);
 }
 
 /* 极其轻盈的白色遮罩，增加文字辨识度同时保留空气感 */
