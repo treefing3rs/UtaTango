@@ -112,26 +112,35 @@
   position: relative;
   transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  /* 双重防线：内侧物理暗影屏障 + 显卡级硬件抗锯齿 */
+  box-shadow: inset 0 -3px 6px rgba(15, 15, 17, 0.98), 0 10px 30px rgba(0,0,0,0.5);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
   transform-style: preserve-3d;
 }
 
 .song-card:hover {
   transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+  box-shadow: inset 0 -3px 6px rgba(15, 15, 17, 0.98), 0 20px 40px rgba(0,0,0,0.7);
 }
+
 
 .card-glass-overlay {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.8) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.4) 50%, rgba(15,15,17,0.95) 90%, #0f0f11 100%);
   padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(255,255,255,0.15);
+  border-left: 1px solid rgba(255,255,255,0.12);
+  border-bottom: none;
+  border-right: none;
   border-radius: 24px;
 }
+
 
 .card-top {
   display: flex;
@@ -277,3 +286,80 @@
   height: 600px;
   background: rgba(229, 164, 82, 0.1);
 }
+
+/* ==========================================================================
+   响应式移动端适配 (Responsive Mobile Layouts) - 完美保留 PC 体验，重塑手机视界
+   ========================================================================== */
+@media (max-width: 768px) {
+  .homepage-container {
+    padding: 2rem 1.5rem;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.8rem;
+    margin-bottom: 3rem;
+  }
+
+  .header-logo h1 {
+    font-size: 2.1rem;
+  }
+
+  .stats-panel {
+    width: 100%;
+    justify-content: space-around;
+    padding: 1rem;
+    gap: 1rem;
+    border-radius: 16px;
+  }
+
+  .stat-box {
+    align-items: center;
+    flex: 1;
+  }
+
+  .stat-value {
+    font-size: 1.7rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+  }
+
+  .song-grid {
+    gap: 1.8rem;
+  }
+
+  .song-card {
+    height: 400px; /* 移动端适当缩矮卡片高度，更符合手机屏占比 */
+  }
+
+  .card-glass-overlay {
+    padding: 1.5rem;
+  }
+
+  .song-title {
+    font-size: 1.5rem;
+  }
+
+  /* 移动端隐藏 hover 弹出唱片，防止视觉拥挤与遮挡文字 */
+  .vinyl-record {
+    display: none !important;
+  }
+  
+  /* 移动端无 Hover，卡片底部文字与按钮直接显示，避免用户疑惑 */
+  .card-bottom {
+    transform: translateY(0) !important;
+  }
+
+  .play-btn {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    width: 100%;
+    text-align: center;
+    padding: 0.7rem 1.2rem;
+    margin-top: 0.5rem;
+  }
+}
+

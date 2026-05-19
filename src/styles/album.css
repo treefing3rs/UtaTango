@@ -268,3 +268,60 @@
     margin: 0 auto;
   }
 }
+
+/* ==========================================================================
+   手机端窄屏专用适配 (Mobile Screen Track-Item Optimization)
+   ========================================================================== */
+@media (max-width: 600px) {
+  .album-page-container {
+    padding: 2rem 1.2rem;
+  }
+  
+  .album-meta h1 {
+    font-size: 2rem;
+  }
+  
+  .track-item {
+    padding: 1.2rem 1rem;
+    flex-wrap: wrap; /* 核心防撞线：开启折行排列 */
+    gap: 0.4rem;
+  }
+  
+  .track-number {
+    width: 40px;
+    font-size: 1.4rem;
+  }
+  
+  .track-info {
+    padding-right: 0.5rem;
+    /* 让标题信息占据一整行的剩余宽度（减去序号和右侧播放图标） */
+    flex: 1 1 calc(100% - 90px);
+  }
+  
+  .track-title {
+    font-size: 1.15rem;
+    line-height: 1.3;
+  }
+  
+  .track-vibe {
+    font-size: 0.8rem;
+  }
+  
+  .track-badges {
+    width: 100%;
+    margin-right: 0;
+    padding-left: 40px; /* 完美对齐上方的歌名，视觉极致舒适 */
+    margin-top: 0.3rem;
+    gap: 0.6rem;
+  }
+  
+  .level-badge, .words-badge {
+    padding: 0.25rem 0.6rem;
+    font-size: 0.75rem;
+  }
+  
+  .track-play-icon {
+    font-size: 1.3rem;
+  }
+}
+

@@ -169,3 +169,57 @@
   text-align: right;
   letter-spacing: 1px;
 }
+
+/* ==========================================================================
+   手机端窄屏横向排版自适应调整 (Mobile Screen Adaptations for Letter Page)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .dakara-nav {
+    top: 1rem;
+    left: 1rem;
+  }
+  
+  .dakara-back-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .dakara-content {
+    padding: 6rem 1.2rem 8rem 1.2rem; /* 缩减 padding，腾出屏幕空间 */
+  }
+
+  .dakara-title {
+    font-size: 1.8rem; /* 从 3rem 降为更小巧的 1.8rem */
+    margin-bottom: 3.5rem;
+    letter-spacing: 2px;
+  }
+
+  .lyrics-flow {
+    gap: 2.2rem;
+  }
+
+  .dakara-line {
+    font-size: 1.05rem; /* 从 1.3rem 降为更适宜的 1.05rem */
+    line-height: 1.9;
+  }
+
+  .dakara-zh {
+    font-size: 0.75rem; /* 翻译文字微调 */
+    letter-spacing: 1px;
+    margin-top: 0.3rem;
+  }
+
+  .glass-popup {
+    width: 240px; /* 缩小浮窗，使其不易超出手机边界 */
+    padding: 1rem;
+  }
+
+  .glass-popup h3 {
+    font-size: 1.15rem;
+  }
+
+  .glass-popup p {
+    font-size: 0.8rem;
+  }
+}
+

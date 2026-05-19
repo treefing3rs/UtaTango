@@ -193,3 +193,68 @@
   text-align: right;
   opacity: 0.8;
 }
+
+/* ==========================================================================
+   手机端窄屏竖排自适应调整 (Mobile Screen Adaptations for Vertical Page)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .shikaki-nav {
+    top: 1rem;
+    right: 1rem;
+  }
+  
+  .shikaki-back-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .shikaki-content {
+    /* 缩窄手机端的侧向 padding，给予歌词更多的滚动延展空间 */
+    padding: 3rem 8vw 3rem 8vw;
+    gap: 3.5rem;
+  }
+
+  .shikaki-title {
+    font-size: 2.2rem; /* 从 3.5rem 降为更精致的 2.2rem */
+    letter-spacing: 0.8rem;
+    margin-left: 2rem;
+    padding-right: 0.8rem;
+  }
+
+  .lyrics-flow {
+    gap: 2rem; /* 减小列间距 */
+  }
+
+  .shikaki-line {
+    gap: 0.8rem;
+    padding-right: 0.8rem;
+  }
+
+  .lyric-ja {
+    font-size: 1.15rem; /* 从 1.6rem 降为 1.15rem，高度不再溢出 */
+    letter-spacing: 0.4rem;
+  }
+
+  .shikaki-zh {
+    font-size: 0.75rem; /* 翻译文字微调 */
+    letter-spacing: 0.15rem;
+  }
+
+  .blank-vocab {
+    min-height: 3rem; /* 相应调整空腔虚线尺寸 */
+  }
+
+  .memo-popup {
+    width: 220px; /* 弹出框更小巧，防止遮挡手机屏幕过多内容 */
+    padding: 0.8rem;
+  }
+  
+  .memo-popup h3 {
+    font-size: 1rem;
+  }
+  
+  .memo-popup p {
+    font-size: 0.8rem;
+  }
+}
+
